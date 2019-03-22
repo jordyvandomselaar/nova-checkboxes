@@ -47,7 +47,6 @@
         },
 
         methods: {
-
             setInitialValue() {
                 this.value = this.field.value || '';
                 this.$nextTick(() => {
@@ -70,9 +69,10 @@
             'options' : {
                 handler: function (newOptions) {
                     this.value = JSON.stringify(newOptions);
+                    Nova.$emit(`${this.field.attribute}-change`, {value: newOptions});
                 },
                 deep: true
-            }
+            },
         }
     }
 </script>

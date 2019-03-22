@@ -11,7 +11,6 @@ class Checkboxes extends Field
 {
     public $component = 'nova-checkboxes';
 
-
     public function options($options)
     {
         return $this->withMeta([
