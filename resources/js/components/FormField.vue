@@ -1,7 +1,7 @@
 <template>
     <default-field :field="field">
         <template slot="field">
-            <ul class="list-reset">
+            <ul class="list-reset" v-if="field.options.length > 0">
                 <li class="flex items-center" v-for="option in field.options">
                     <checkbox
                         class="py-2 mr-4"
@@ -17,6 +17,8 @@
                     ></label>
                 </li>
             </ul>
+
+            <slot v-else></slot>
 
             <p v-if="hasError" class="my-2 text-danger">
                 {{ firstError }}
@@ -61,7 +63,7 @@
             },
 
             handleChange(key) {
-                this.options[key] = ! this.options[key];
+                this.$set(this.options, key, ! this.options[key])
             }
         },
 

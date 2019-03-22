@@ -852,6 +852,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -892,7 +894,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             formData.append(this.field.attribute, this.value || '');
         },
         handleChange: function handleChange(key) {
-            this.options[key] = !this.options[key];
+            this.$set(this.options, key, !this.options[key]);
         }
     },
 
@@ -11146,51 +11148,58 @@ var render = function() {
     "default-field",
     { attrs: { field: _vm.field } },
     [
-      _c("template", { slot: "field" }, [
-        _c(
-          "ul",
-          { staticClass: "list-reset" },
-          _vm._l(_vm.field.options, function(option) {
-            return _c(
-              "li",
-              { staticClass: "flex items-center" },
-              [
-                _c("checkbox", {
-                  staticClass: "py-2 mr-4",
-                  attrs: {
-                    id: _vm.field.name,
-                    name: _vm.field.name,
-                    checked: _vm.options[option.value]
-                  },
-                  on: {
-                    input: function($event) {
-                      return _vm.handleChange(option.value)
-                    }
-                  }
+      _c(
+        "template",
+        { slot: "field" },
+        [
+          _vm.field.options.length > 0
+            ? _c(
+                "ul",
+                { staticClass: "list-reset" },
+                _vm._l(_vm.field.options, function(option) {
+                  return _c(
+                    "li",
+                    { staticClass: "flex items-center" },
+                    [
+                      _c("checkbox", {
+                        staticClass: "py-2 mr-4",
+                        attrs: {
+                          id: _vm.field.name,
+                          name: _vm.field.name,
+                          checked: _vm.options[option.value]
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.handleChange(option.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", {
+                        attrs: { for: _vm.field.name },
+                        domProps: { textContent: _vm._s(option.label) },
+                        on: {
+                          click: function($event) {
+                            return _vm.handleChange(option.value)
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  )
                 }),
-                _vm._v(" "),
-                _c("label", {
-                  attrs: { for: _vm.field.name },
-                  domProps: { textContent: _vm._s(option.label) },
-                  on: {
-                    click: function($event) {
-                      return _vm.handleChange(option.value)
-                    }
-                  }
-                })
-              ],
-              1
-            )
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _vm.hasError
-          ? _c("p", { staticClass: "my-2 text-danger" }, [
-              _vm._v("\n            " + _vm._s(_vm.firstError) + "\n        ")
-            ])
-          : _vm._e()
-      ])
+                0
+              )
+            : _vm._t("default"),
+          _vm._v(" "),
+          _vm.hasError
+            ? _c("p", { staticClass: "my-2 text-danger" }, [
+                _vm._v("\n            " + _vm._s(_vm.firstError) + "\n        ")
+              ])
+            : _vm._e()
+        ],
+        2
+      )
     ],
     2
   )
