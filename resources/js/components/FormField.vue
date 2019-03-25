@@ -52,9 +52,12 @@
             setInitialValue() {
                 this.value = this.field.value || '';
                 this.$nextTick(() => {
-                    this.options = (this.value)
+                    const options = (this.value)
                         ? JSON.parse(this.value)
                         : [];
+                    this.options = options;
+
+                    Nova.$emit(`${this.field.attribute}-default-options`, {value: options});
                 });
             },
 
@@ -70,8 +73,10 @@
         watch: {
             'options' : {
                 handler: function (newOptions) {
-                    this.value = JSON.stringify(newOptions);
+                    const newValue =JSON.stringify(newOptions);
+                    this.value =  newValue;
                     Nova.$emit(`${this.field.attribute}-change`, {value: newOptions});
+                    this.$emit("change", newValue);
                 },
                 deep: true
             },

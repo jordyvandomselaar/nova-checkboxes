@@ -887,7 +887,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             this.value = this.field.value || '';
             this.$nextTick(function () {
-                _this2.options = _this2.value ? JSON.parse(_this2.value) : [];
+                var options = _this2.value ? JSON.parse(_this2.value) : [];
+                _this2.options = options;
+
+                Nova.$emit(_this2.field.attribute + '-default-options', { value: options });
             });
         },
         fill: function fill(formData) {
@@ -901,8 +904,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     watch: {
         'options': {
             handler: function handler(newOptions) {
-                this.value = JSON.stringify(newOptions);
+                var newValue = JSON.stringify(newOptions);
+                this.value = newValue;
                 Nova.$emit(this.field.attribute + '-change', { value: newOptions });
+                this.$emit("change", newValue);
             },
             deep: true
         }
