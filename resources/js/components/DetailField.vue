@@ -1,22 +1,25 @@
 <template>
     <panel-item :field="field">
         <div class="flex" slot="value">
-            <ul :class="['list-reset', 'items-top', width]" v-for="options in chunkedOptions">
-                <component
-                    v-for="option in options"
-                    :key="option.key"
-                    :is="getItemType(option)"
-                    :option="option"
-                ></component>
-            </ul>
+            <div v-if="optionList.length > 0">
+                <ul :class="['list-reset', 'items-top', width]" v-for="options in chunkedOptions">
+                    <component
+                            v-for="option in options"
+                            :key="option.key"
+                            :is="getItemType(option)"
+                            :option="option"
+                    ></component>
+                </ul>
+            </div>
+            <span v-else>—</span>
         </div>
     </panel-item>
 </template>
 
 <script>
-import CheckboxDisplay from '../mixins/CheckboxDisplay';
+    import CheckboxDisplay from "../mixins/CheckboxDisplay";
 
-export default {
+    export default {
     mixins: [CheckboxDisplay],
 
     props: ['resource', 'resourceName', 'resourceId', 'field'],

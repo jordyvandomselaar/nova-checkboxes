@@ -688,6 +688,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -738,21 +741,28 @@ var render = function() {
     _c(
       "div",
       { staticClass: "flex", attrs: { slot: "value" }, slot: "value" },
-      _vm._l(_vm.chunkedOptions, function(options) {
-        return _c(
-          "ul",
-          { class: ["list-reset", "items-top", _vm.width] },
-          _vm._l(options, function(option) {
-            return _c(_vm.getItemType(option), {
-              key: option.key,
-              tag: "component",
-              attrs: { option: option }
-            })
-          }),
-          1
-        )
-      }),
-      0
+      [
+        _vm.optionList.length > 0
+          ? _c(
+              "div",
+              _vm._l(_vm.chunkedOptions, function(options) {
+                return _c(
+                  "ul",
+                  { class: ["list-reset", "items-top", _vm.width] },
+                  _vm._l(options, function(option) {
+                    return _c(_vm.getItemType(option), {
+                      key: option.key,
+                      tag: "component",
+                      attrs: { option: option }
+                    })
+                  }),
+                  1
+                )
+              }),
+              0
+            )
+          : _c("span", [_vm._v("—")])
+      ]
     )
   ])
 }
