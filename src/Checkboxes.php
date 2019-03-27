@@ -2,6 +2,8 @@
 
 namespace Fourstacks\NovaCheckboxes;
 
+use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Laravel\Nova\Fields\Field;
 use Illuminate\Support\Collection;
