@@ -35,11 +35,14 @@ trait HasRelationshipCheckboxes
      * Parse a collection of models into checkbox data
      *
      * @param string $relation
+     * @param string $idKey id column name
      * @return array
      */
-    public function modelsToCheckboxData(string $relation): array
+    public function modelsToCheckboxData(string $relation, string $idKey = ''): array
     {
-        $idKey = sprintf('%s.id', Str::plural($relation));
+        if($idKey === '') {
+            $idKey = sprintf('%s.id', Str::plural($relation));
+        }
 
         return $this->{$relation}()->get([$idKey])->reduce(
             function (array $carrier, Model $model): array {

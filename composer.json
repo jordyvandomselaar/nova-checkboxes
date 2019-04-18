@@ -16,7 +16,6 @@
         "php": ">=7.1.0"
     },
     "require-dev": {
-        "laravel/nova": "^1.0",
         "orchestra/testbench": "3.7.*",
         "phpunit/phpunit": "^7.0"
     },
